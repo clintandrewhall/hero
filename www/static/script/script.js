@@ -16,50 +16,134 @@
   }
   */
 
+  var CLICK = "click";
+
   function onBodyLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
   }
 
   function typeText(element, callback) {
+    if(element.typing) return;
+    console.log("Typing text: " + element);
+    element.typing = true;
     var text = element.innerHTML;
     element.style.height = element.offsetHeight + "px";
     element.innerHTML = "";
     element.style.visibility = "visible";
 
+    text = text.replace(/^\s+|\s+$/g,"");
     var l = text.length,
         i = 0;
 
-    function addLetter() {
-      element.innerHTML += text[i];
+    function cancel() {
+      i = l;
+      element.innerHTML = text;
+      $(document).unbind(CLICK, cancel);
+    }
+
+    $(document).bind(CLICK, cancel);
+
+    function addLetter(element, text) {
+      element.innerHTML += text[i] ? text[i] : "";
       i++;
-      if(i < l) {
-        setTimeout(addLetter, 50);
+      if(i < l && text[i]) {
+        setTimeout(function() {
+          addLetter(element, text);
+        }, 50);
       }
       else {
+        $(document).unbind(CLICK, cancel);
+        element.typing = false;
         if(callback) {
           callback();
         }
       }
     }
 
-    addLetter();
+    addLetter(element, text);
   }
 
-  function loadDashboard() {
-    $("#dashboard .stats").bind("webkitTransitionEnd", function() {
+  function popDialog(text, className) {
+    if($(".dialog.popped")[0]) return;
+
+    className = className || "";
+
+    showScreen(true, function() {
+      var d = "<article class='dialog popped " + className + "'>";
+        d += "<div class='dialog-inner'>";
+        d += "<p class='typeable'>";
+        d += text;
+        d += "</p></div</article>";
+
+      $(".page").append(d);
+
+      var dialog = $(".dialog.popped");
+      dialog.bind("webkitAnimationEnd", function() {
+        typeText($(".dialog.popped .typeable")[0]);
+      }).addClass("show");
+    });
+
+    function cancel() {
+      $(".dialog.popped").remove();
+      showScreen();
+      $(document).unbind(CLICK, cancel);
+    }
+
+    $(document).bind(CLICK, cancel);
+  }
+
+  function showScreen(b, callback) {
+    var s = $(".screen"),
+        d = function() {
+          if(callback) callback();
+          s.unbind("webkitTransitionEnd", d);
+        };
+    
+    s.bind("webkitTransitionEnd", d);
+    b ? s.addClass("show") : s.removeClass("show");
+  }
+
+  function loadQuest() {
+    $(".show").removeClass("show");
+    $("#quest").bind("webkitTransitionEnd", function() {
+      $("#quest .stats").addClass("show");
       setTimeout(function() {
-        $("#dashboard .dialog.wizard").bind("webkitAnimationEnd", function() {
-          typeText($("#dashboard .dialog.wizard .typeable")[0]);
+        
+      }, 500);
+    }).addClass("show");
+    return false;
+  }
+
+  function loadHouse() {
+    $(".show").removeClass("show");
+    $("#house").bind("webkitTransitionEnd", function() {
+      $("#house .stats").addClass("show");
+      setTimeout(function() {
+        $(".badges").bind("webkitAnimationEnd", function() {
+          $(".avatar").bind("webkitAnimationEnd", function() {
+            $(".messages").bind("webkitAnimationEnd", function() {
+              setTimeout(function() {
+                $("#house .choice").addClass("show");
+              }, 500);
+            }).addClass("show");
+          }).addClass("show");
         }).addClass("show");
       }, 500);
     }).addClass("show");
+    return false;
   }
 
   function loadTown() {
-    $("#welcome").bind("webkitTransitionEnd", function() {
-      loadDashboard();
-    });
-    $("#welcome").addClass("hide");
+    $(".show").removeClass("show");
+    $("#dashboard").bind("webkitTransitionEnd", function() {
+      $("#dashboard .stats").bind("webkitTransitionEnd", function() {
+        setTimeout(function() {
+          $("#dashboard .dialog.wizard").bind("webkitAnimationEnd", function() {
+            typeText($("#dashboard .dialog.wizard .typeable")[0]);
+          }).addClass("show");
+        }, 500);
+      }).addClass("show");
+    }).addClass("show");
     return false;
   }
 
@@ -68,6 +152,10 @@
   see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
   for more details -jm */
   function onDeviceReady() {
+
+    CLICK = device.platform ? "touchstart" : CLICK;
+    alert(CLICK);
+
     // do your thing!
     //navigator.notification.alert("PhoneGap is working");
     var tinkle = new Media("static/sounds/twinkle.wav"),
@@ -89,7 +177,7 @@
       }).addClass("show");
     });
 
-    $("#welcome .choice").bind("tap", loadTown);
+    $("#welcome .choice").bind(CLICK, loadTown);
 
     intro.play();
 
@@ -102,7 +190,7 @@
       sound = !sound;
     });
 
-    start.bind("touchstart", function() {
+    start.bind(CLICK, function() {
       intro.stop();
       setTimeout(function() {
         coin.play();
@@ -118,11 +206,15 @@
       }, 100);
       return false;
     });
+
+    $("a[rel='town']").bind(CLICK, loadTown);
+    $("a[rel='house']").bind(CLICK, loadHouse);
+    $("a[rel='quest']").bind(CLICK, loadQuest);
   }
 
   // Enable pusher logging - don't include this in production
   Pusher.log = function(message) {
-    if (window.console && window.console.log) window.console.log(message);
+    
   };
 
   // Flash fallback logging - don't include this in production
@@ -131,5 +223,5 @@
   var pusher = new Pusher('8159432ab8d315714b65');
   var channel = pusher.subscribe('test_channel');
   channel.bind('my_event', function(data) {
-    alert(data);
+    popDialog(data);
   });

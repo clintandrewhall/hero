@@ -41,15 +41,15 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
 .sound {
   position: absolute;
   z-index: 100;
-  top: 0;
+  bottom: 0;
   right: 0;
 }
+
 .sound a {
   display: block;
   text-indent: -1000px;
   width: 15px;
   height: 15px;
-  background: #000;
   overflow: hidden;
 }
 
@@ -58,33 +58,36 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
   top: 0;
   height: 480px;
   width: 320px;
+  opacity: 0;
+  -webkit-transition: all .5s linear;
+}
+
+.panel.show {
+  opacity: 1;
+  z-index: 50;
 }
 
 #start {
   background: url(../images/homescreen.png) no-repeat 0 0;
   height: 1110px;
   top: 480px;
-  z-index: 40;
 }
 
 #welcome {
   background: url(../images/castleinterior.png) no-repeat 0 0;
   top: 0;
-  z-index: 30;
-  -webkit-transition: all .5s linear;
-}
-
-.hide {
-  opacity: 0;
 }
 
 #dashboard {
   background: url(../images/dashboard.png) no-repeat 0 0;
-  z-index: 20;
 }
 
 #house {
-  z-index: 10;
+  background: url(../images/houseinterior.png) no-repeat 0 0;
+}
+
+#quest {
+  background: url(../images/castleinterior.png) no-repeat 0 0;
 }
 
 .hd {
@@ -181,12 +184,12 @@ a.blink {
   line-height: 25px;
   width: 25%;
 }
-.stats dt span { padding: 0 2px; }
+.stats dt span { padding: 0 0 0 5px; }
 .stats dd { text-align: center; line-height: 17px; }
 .stats dd span {
   border: 2px solid #FFF;
   display: block;
-  margin: 1px 5px 1px 1px;
+  margin: 1px 3px 1px 1px;
   background: url(../images/adv.png) no-repeat -70px 0;
   -webkit-transition: background-position 1s linear;
 }
@@ -204,3 +207,94 @@ dt.fit { clear: left; }
   height: 45px; top: 384px; left: 0; right: 0;
 }
 #dashboard .dialog { font-size: 14px; line-height: 16px; }
+
+.dash-nav a {
+  position: absolute;
+  display: block;
+  text-indent: -1000px;
+  top: 54px;
+  left: 0;
+}
+#dash-house a { width: 162px; height: 167px; }
+#dash-quest a {width: 158px; height: 167px; left: 162px; }
+#dash-pub a { width: 162px; height: 163px; top: 221px; }
+#dash-fame a { width: 158px; height: 167px; top: 221px; left: 162px; }
+
+/*///////////////////*/
+.d-hd { text-align: center; }
+.count { font-size: 3em; text-align: center; margin: .5em 0; }
+.msg { padding: 0 0 5px 45px; background: no-repeat 2px 2px; }
+.msg.klout { background-image: url(../images/klout.png); }
+.msg.rk { background-image: url(../images/rk.png); }
+
+.badges {
+  left: 10px; right: 165px; top: 75px; height: 150px;
+}
+.avatar {
+  left: 165px; right: 10px; top: 75px; height: 150px;
+}
+.messages {
+  font-size: 14px;
+  left: 10px; right: 10px; top: 275px; height: 100px;
+}
+
+@-webkit-keyframes badges-dialog-grow {
+  from { top: 145px; left: 75px; right: 250px; height: 0; opacity: .5; }
+  to { top: 60px; left: 10px; right: 165px; height: 145px; opacity: 1; }
+}
+@-webkit-keyframes avatar-dialog-grow {
+  from { top: 145px; left: 250px; right: 85px; height: 0; opacity: .5; }
+  to {  top: 60px; left: 165px; right: 10px; height: 145px; opacity: 1; }
+}
+@-webkit-keyframes messages-dialog-grow {
+  from { top: 280px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 260px; left: 10px; right: 10px; height: 90px; opacity: 1; }
+}
+
+.show.badges {
+  -webkit-animation-name: badges-dialog-grow;
+   top: 60px; left: 10px; right: 165px; height: 150px;
+}
+.show.avatar {
+  -webkit-animation-name: avatar-dialog-grow;
+   top: 60px; left: 165px; right: 10px; height: 150px;
+}
+.show.messages {
+  -webkit-animation-name: messages-dialog-grow;
+   top: 260px; left: 10px; right: 10px; height: 90px;
+}
+
+@-webkit-keyframes popped-dialog-grow {
+  from { top: 135px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 100px; left: 10px; right: 10px; opacity: 1; }
+}
+.screen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  content: "HELLO";
+  text-indent: -1000px;
+  background: #FFF;
+  -webkit-transition: all .4s linear;
+}
+.screen.show {
+  z-index: 999;
+  opacity: .4;
+}
+.popped {
+  -webkit-animation-name: popped-dialog-grow;
+  z-index: 1000;
+  top: 100px; left: 10px; right: 10px;
+}
+.popped .dialog-inner {
+  z-index: 1000;
+  min-height: 20px;
+  padding: 0 10px;
+}
+.popped .typeable {
+  visibility: hidden;
+}

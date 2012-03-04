@@ -10,7 +10,7 @@
     -->
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="static/style/iphone.css" type="text/css" />
     <!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
-    <script src="http://js.pusher.com/1.11/pusher.min.js"></script>
+    <script src="static/script/pusher.js"></script>
     <script type="text/javascript" charset="utf-8" src="static/script/json2.js"></script>
     <script type="text/javascript" charset="utf-8" src="static/script/phonegap-1.4.1.js"></script>
     <script type="text/javascript" charset="utf-8" src="static/script/zepto.js"></script>
@@ -19,7 +19,7 @@
   <body onload="onBodyLoad();">
     <p class="sound"><a href="#" rel="sound">Sound</a></p>
     <div class="page">
-      <section class="panel" id="start">
+      <section class="panel show" id="start">
         <header>
           <h1 class="h1 hd"><span class="cap">The Hero App</span></h1>
         </header>
@@ -27,7 +27,7 @@
           <p class="start"><a href="#dashboard" class="blink" rel="start"><span>Press Start</span></a></p>
         </nav>
       </section>
-      <section class="panel" id="welcome">
+      <section class="panel show" id="welcome">
         <article class="dialog wizard">
           <div class="dialog-inner">
             <p class="typeable">
@@ -35,7 +35,7 @@
             </p>
           </div>
         </article>
-        <ol>
+        <ol class="choices">
           <li class="dialog choice second">
             <p class="dialog-inner"><a href="#">Facebook</a></p>
           </li>
@@ -55,17 +55,74 @@
           <dt><span>Charisma</span></dt>
           <dd class="cha l3"><span>L3</span></dd>
         </dl>
+        <ul class="dash-nav">
+          <li id="dash-house"><a href="#house" rel="house">House</a></li>
+          <li id="dash-quest"><a href="#quest" rel="quest">Quest</a></li>
+          <li id="dash-pub"><a href="#pub" rel="pub">Pub</a></li>
+          <li id="dash-fame"><a href="#fame" rel="fame">Fame</a></li>
+        </ul>
         <article class="dialog wizard">
           <div class="dialog-inner">
             <p class="typeable">
-              Welcome back. Your prowess has certainly improved in your absence. I'm impressed!
+              Welcome back. Your prowess has certainly improved since last I saw you. I'm impressed!
             </p>
           </div>
         </article>
       </section>
       <section class="panel" id="house">
-        [house]
+        <dl class="stats">
+          <dt><span>Adventure</span></dt>
+          <dd class="adv l2"><span>L2</span></dd>
+          <dt><span>Intelligence</span></dt>
+          <dd class="int l3"><span>L3</span></dd>
+          <dt class="fit"><span>Fitness</span></dt>
+          <dd class="fit l1"><span>L1</span></dd>
+          <dt><span>Charisma</span></dt>
+          <dd class="cha l3"><span>L3</span></dd>
+        </dl>
+        <article class="dialog badges">
+          <div class="dialog-inner">
+            <h3 class="h3 d-hd">Badges</h3>
+            <p class="count">42</p>
+          </div>
+        </article>
+        <article class="dialog avatar">
+          <div class="dialog-inner">
+            <h3 class="h3 d-hd">Avatar</h3>
+            <img src="static/images/brogrammer.png" height="296" width="120" alt=""/>
+          </div>
+        </article>
+        <article class="dialog messages">
+          <div class="dialog-inner">
+            <ol class="msgs">
+              <li class="msg klout"><span class="cap">Feb 22: Charisma +2 pts from increased Klout score.</span></li>
+              <li class="msg rk"><span class="cap">Feb 21: Fitness +8 pts from 10km run.</span></li>
+            </ol>
+          </div>
+        </article>
+        <ol class="choices">
+          <li class="dialog choice first">
+            <p class="dialog-inner"><a href="#" rel="town">Back</a></p>
+          </li>
+        </ol>
       </section>
+      <section class="panel" id="quest">
+        <dl class="stats">
+          <dt><span>Adventure</span></dt>
+          <dd class="adv l2"><span>L2</span></dd>
+          <dt><span>Intelligence</span></dt>
+          <dd class="int l3"><span>L3</span></dd>
+          <dt class="fit"><span>Fitness</span></dt>
+          <dd class="fit l1"><span>L1</span></dd>
+          <dt><span>Charisma</span></dt>
+          <dd class="cha l3"><span>L3</span></dd>
+        </dl>
+      </section>
+      <section class="panel" id="pub">
+      </section>
+      <section class="panel" id="fame">
+      </section>
+      <p class="screen"></p>
     </div>
   </body>
 </html>
