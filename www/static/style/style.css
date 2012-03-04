@@ -6,12 +6,31 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
   from { opacity: 1.0; }
   to { opacity: 0.0; }
 }
+@-webkit-keyframes top-dialog-grow {
+  from { top: 55px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 10px; left: 10px; right: 10px; opacity: 1; }
+}
+@-webkit-keyframes bottom-dialog-grow {
+  from { top: 400px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 384px; left: 0px; right: 0px; opacity: 1; }
+}
+@-webkit-keyframes first-choice-grow {
+  from { top: 415px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 400px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+@-webkit-keyframes second-choice-grow {
+  from { top: 355px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 340px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+@-webkit-keyframes third-choice-grow {
+  from { top: 295px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 280px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
 
 .page {
   height: 1590px;
   width: 320px;
   position: relative;
-  top: -1110px;
   -webkit-transition: all 4s ease-out;
 }
 
@@ -19,7 +38,20 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
   top: 0;
 }
 
-.sound { position: absolute; }
+.sound {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+}
+.sound a {
+  display: block;
+  text-indent: -1000px;
+  width: 15px;
+  height: 15px;
+  background: #000;
+  overflow: hidden;
+}
 
 .panel {
   position: absolute;
@@ -32,21 +64,27 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
   background: url(../images/homescreen.png) no-repeat 0 0;
   height: 1110px;
   top: 480px;
-  z-index: 10;
+  z-index: 40;
 }
 
 #welcome {
   background: url(../images/castleinterior.png) no-repeat 0 0;
   top: 0;
-  z-index: 20;
+  z-index: 30;
+  -webkit-transition: all .5s linear;
+}
+
+.hide {
+  opacity: 0;
 }
 
 #dashboard {
-  z-index: 0;
+  background: url(../images/dashboard.png) no-repeat 0 0;
+  z-index: 20;
 }
 
 #house {
-  z-index: 0;
+  z-index: 10;
 }
 
 .hd {
@@ -75,3 +113,94 @@ a.blink {
   -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
   -webkit-animation-duration: 1.25s;
 }
+
+.dialog {
+  text-transform: none;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFF;
+  position: absolute;
+  overflow: hidden;
+  -webkit-border-image: url(../images/dialog-border.png) 14 10 13 10 repeat repeat;
+  border-width: 20px;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-duration: .3s;
+  display: none;
+  max-height: 150px;
+}
+
+.dialog.show {
+  display: block;
+}
+
+.dialog-inner {
+  background: #063FF4;
+  height: 100%;
+}
+.wizard .dialog-inner {
+  background: #063FF4 url(../images/wizard.png) no-repeat 0 0;
+  padding-left: 50px;
+}
+#welcome .wizard.show {
+  -webkit-animation-name: top-dialog-grow;
+  height: 110px; top: 10px; left: 10px; right: 10px;
+}
+.wizard .dialog-inner p { visibility: hidden; }
+.choice { border-width: 12px;
+  -webkit-animation-duration: .2s;
+}
+.show.first {
+  -webkit-animation-name: first-choice-grow;
+  top: 400px; left: 10px; right: 10px; height: 25px;
+}
+.choice a { color: #FFF; text-decoration: none;
+  line-height: 27px; display: block;
+  padding-left: 15px;
+}
+.show.second {
+  -webkit-animation-name: second-choice-grow;
+  top: 340px; left: 10px; right: 10px; height: 25px;
+}
+
+/*///////////////////*/
+
+.stats {
+  color: #FFF;
+  font-size: .5em;
+  font-weight: normal;
+  text-transform: none;
+  padding-top: 3px;
+  opacity: 0;
+  -webkit-transition: opacity .25s linear;
+}
+.stats.show { opacity: 1; }
+.stats dt, .stats dd {
+  float: left;
+  line-height: 25px;
+  width: 25%;
+}
+.stats dt span { padding: 0 2px; }
+.stats dd { text-align: center; line-height: 17px; }
+.stats dd span {
+  border: 2px solid #FFF;
+  display: block;
+  margin: 1px 5px 1px 1px;
+  background: url(../images/adv.png) no-repeat -70px 0;
+  -webkit-transition: background-position 1s linear;
+}
+dd.int span { background-image: url(../images/int.png); }
+dd.fit span { background-image: url(../images/fit.png); }
+dd.cha span { background-image: url(../images/cha.png); }
+.show.stats dd.l1 span { background-position: -52px 0; }
+.show.stats dd.l2 span { background-position: -35px 0; }
+.show.stats dd.l3 span { background-position: -18px 0; }
+.show.stats dd.l4 span { background-position: 0 0; }
+dt.fit { clear: left; }
+#dashboard .wizard { border-width: 12px; }
+#dashboard .wizard.show {
+  -webkit-animation-name: bottom-dialog-grow;
+  height: 45px; top: 384px; left: 0; right: 0;
+}
+#dashboard .dialog { font-size: 14px; line-height: 16px; }

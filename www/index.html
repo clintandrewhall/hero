@@ -7,15 +7,16 @@
     <link type="text/css" href="static/style/style.css" rel="stylesheet"/>
     <!-- iPad/iPhone specific css below, add after your main css >
     <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />
-    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
     -->
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="static/style/iphone.css" type="text/css" />
     <!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+    <script src="http://js.pusher.com/1.11/pusher.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="static/script/json2.js"></script>
     <script type="text/javascript" charset="utf-8" src="static/script/phonegap-1.4.1.js"></script>
     <script type="text/javascript" charset="utf-8" src="static/script/zepto.js"></script>
     <script type="text/javascript" charset="utf-8" src="static/script/script.js"></script>
   </head>
-  <body onload="onBodyLoad()">
+  <body onload="onBodyLoad();">
     <p class="sound"><a href="#" rel="sound">Sound</a></p>
     <div class="page">
       <section class="panel" id="start">
@@ -27,10 +28,40 @@
         </nav>
       </section>
       <section class="panel" id="welcome">
-        
+        <article class="dialog wizard">
+          <div class="dialog-inner">
+            <p class="typeable">
+              Greetings Traveller! To continue your adventures, sign in with one of the following services...
+            </p>
+          </div>
+        </article>
+        <ol>
+          <li class="dialog choice second">
+            <p class="dialog-inner"><a href="#">Facebook</a></p>
+          </li>
+          <li class="dialog choice first">
+            <p class="dialog-inner"><a href="#">Twitter</a></p>
+          </li>
+        </ol>
       </section>
       <section class="panel" id="dashboard">
-        [dashboard]
+        <dl class="stats">
+          <dt><span>Adventure</span></dt>
+          <dd class="adv l2"><span>L2</span></dd>
+          <dt><span>Intelligence</span></dt>
+          <dd class="int l3"><span>L3</span></dd>
+          <dt class="fit"><span>Fitness</span></dt>
+          <dd class="fit l1"><span>L1</span></dd>
+          <dt><span>Charisma</span></dt>
+          <dd class="cha l3"><span>L3</span></dd>
+        </dl>
+        <article class="dialog wizard">
+          <div class="dialog-inner">
+            <p class="typeable">
+              Welcome back. Your prowess has certainly improved in your absence. I'm impressed!
+            </p>
+          </div>
+        </article>
       </section>
       <section class="panel" id="house">
         [house]
