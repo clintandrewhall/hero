@@ -1,0 +1,77 @@
+html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,select,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,button,caption,cite,code,dfn,em,input,optgroup,option,select,strong,textarea,th,var{font:inherit}del,ins{text-decoration:none}li{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:baseline}sub{vertical-align:baseline}legend{color:#000}
+@font-face { font-family: "8bit"; src: url(../fonts/04B_03__.TTF) format("truetype"); }
+body { font: 26px "8bit", monospace; text-transform: uppercase; }
+
+@-webkit-keyframes blinker {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+
+.page {
+  height: 1590px;
+  width: 320px;
+  position: relative;
+  top: -1110px;
+  -webkit-transition: all 4s ease-out;
+}
+
+.page.one {
+  top: 0;
+}
+
+.sound { position: absolute; }
+
+.panel {
+  position: absolute;
+  top: 0;
+  height: 480px;
+  width: 320px;
+}
+
+#start {
+  background: url(../images/homescreen.png) no-repeat 0 0;
+  height: 1110px;
+  top: 480px;
+  z-index: 10;
+}
+
+#welcome {
+  background: url(../images/castleinterior.png) no-repeat 0 0;
+  top: 0;
+  z-index: 20;
+}
+
+#dashboard {
+  z-index: 0;
+}
+
+#house {
+  z-index: 0;
+}
+
+.hd {
+  color: #FFF;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 17.75em 0 .75em 0;
+}
+
+.start {
+  text-align: center;
+}
+
+.one a.blink {
+  -webkit-animation-name: none;
+}
+
+.start a {
+  color: #FF221B;
+  text-decoration: none;
+}
+
+a.blink {
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  -webkit-animation-duration: 1.25s;
+}

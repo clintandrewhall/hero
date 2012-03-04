@@ -7,7 +7,7 @@
 	<key>EnableLocation</key>
 	<false/>
 	<key>EnableViewportScale</key>
-	<false/>
+	<true/>
 	<key>AutoHideSplashScreen</key>
 	<true/>
 	<key>ShowSplashScreenSpinner</key>
