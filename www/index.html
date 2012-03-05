@@ -17,11 +17,12 @@
     <script type="text/javascript" charset="utf-8" src="static/script/script.js"></script>
   </head>
   <body onload="onBodyLoad();">
+    <div class="floater"></div>
     <p class="sound"><a href="#" rel="sound">Sound</a></p>
     <div class="page">
       <section class="panel show" id="start">
         <header>
-          <h1 class="h1 hd"><span class="cap">The Hero App</span></h1>
+          <h1 class="h1 hd"><span class="cap">Hero Me!</span></h1>
         </header>
         <nav class="nav">
           <p class="start"><a href="#dashboard" class="blink" rel="start"><span>Press Start</span></a></p>
@@ -117,12 +118,48 @@
           <dt><span>Charisma</span></dt>
           <dd class="cha l3"><span>L3</span></dd>
         </dl>
+        <article class="dialog wizard">
+          <div class="dialog-inner">
+            <p class="typeable">
+              What aspect would you like to improve?
+            </p>
+          </div>
+        </article>
+        <ol id="questChoices" class="choices">
+          <li class="dialog choice fifth">
+            <p class="dialog-inner"><a href="#">Adventure</a></p>
+          </li>
+          <li class="dialog choice fourth">
+            <p class="dialog-inner"><a href="#">Charisma</a></p>
+          </li>
+          <li class="dialog choice third">
+            <p class="dialog-inner"><a href="#" rel="fitness">Fitness</a></p>
+          </li>
+          <li class="dialog choice second">
+            <p class="dialog-inner"><a href="#">Intelligence</a></p>
+          </li>
+          <li class="dialog choice first">
+            <p class="dialog-inner"><a href="#" rel="town">Postpone Quest</a></p>
+          </li>
+        </ol>
+        <ol id="questOptions" class="choices">
+          <li class="dialog choice third">
+            <p class="dialog-inner"><a href="#">Log 15 miles of running.</a></p>
+          </li>
+          <li class="dialog choice second">
+            <p class="dialog-inner"><a href="#">Burn 5000 calories.</a></p>
+          </li>
+          <li class="dialog choice first">
+            <p class="dialog-inner"><a href="#" rel="town">Postpone Quest</a></p>
+          </li>
+        </ol>
       </section>
       <section class="panel" id="pub">
+        <p class="back-button"><a href="#" rel="town"></a></p>
       </section>
       <section class="panel" id="fame">
       </section>
-      <p class="screen"></p>
+      <p class="blocker"></p>
     </div>
   </body>
 </html>

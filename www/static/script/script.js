@@ -24,12 +24,13 @@
 
   function typeText(element, callback) {
     if(element.typing) return;
-    console.log("Typing text: " + element);
+
     element.typing = true;
     var text = element.innerHTML;
     element.style.height = element.offsetHeight + "px";
     element.innerHTML = "";
-    element.style.visibility = "visible";
+
+    $(element).css("visibility", "visible");
 
     text = text.replace(/^\s+|\s+$/g,"");
     var l = text.length,
@@ -63,52 +64,56 @@
     addLetter(element, text);
   }
 
-  function popDialog(text, className) {
-    if($(".dialog.popped")[0]) return;
+  function popDialog(text, clear) {
+    if($("#popped")[0]) return;
 
-    className = className || "";
+    var d = "<article id=\"popped\" class=\"dialog\">";
+    d += "<div class=\"dialog-inner\">";
+    d += "<p class='typeable'>";
+    d += text;
+    d += "</p></div></article>";
 
-    showScreen(true, function() {
-      var d = "<article class='dialog popped " + className + "'>";
-        d += "<div class='dialog-inner'>";
-        d += "<p class='typeable'>";
-        d += text;
-        d += "</p></div</article>";
 
-      $(".page").append(d);
-
-      var dialog = $(".dialog.popped");
-      dialog.bind("webkitAnimationEnd", function() {
-        typeText($(".dialog.popped .typeable")[0]);
-      }).addClass("show");
-    });
+    $(".floater").html(d);
+    var dialog = $("#popped");
+    dialog.bind("webkitAnimationEnd", function() {
+      typeText($("#popped .typeable")[0]);
+    }).addClass("show");
 
     function cancel() {
-      $(".dialog.popped").remove();
-      showScreen();
-      $(document).unbind(CLICK, cancel);
+      $(".floater").html("");
+      showScreen(false);
+      $(".blocker").unbind(CLICK, cancel);
     }
 
-    $(document).bind(CLICK, cancel);
+    showScreen(true);
+    $(".blocker").bind(CLICK, cancel);
   }
 
-  function showScreen(b, callback) {
-    var s = $(".screen"),
-        d = function() {
-          if(callback) callback();
-          s.unbind("webkitTransitionEnd", d);
-        };
-    
-    s.bind("webkitTransitionEnd", d);
-    b ? s.addClass("show") : s.removeClass("show");
+  function showScreen(b) {
+    b ? $(".blocker").addClass("show") : $(".blocker").removeClass("show");
+  }
+
+  function loadPub() {
+    $(".show").removeClass("show");
+    $("#pub").bind("webkitTransitionEnd", function() {
+
+    }).addClass("show");
   }
 
   function loadQuest() {
     $(".show").removeClass("show");
+    $("#quest .typeable").css("visibility", "hidden");
     $("#quest").bind("webkitTransitionEnd", function() {
       $("#quest .stats").addClass("show");
       setTimeout(function() {
-        
+        $("#quest .wizard").bind("webkitAnimationEnd", function() {
+          typeText($("#quest .wizard .typeable")[0], function() {
+            setTimeout(function() {
+              $("#questChoices .choice").addClass("show");
+            }, 250);
+          });
+        }).addClass("show");
       }, 500);
     }).addClass("show");
     return false;
@@ -135,6 +140,7 @@
 
   function loadTown() {
     $(".show").removeClass("show");
+    $("#dashboard .typeable").css("visibility", "hidden");
     $("#dashboard").bind("webkitTransitionEnd", function() {
       $("#dashboard .stats").bind("webkitTransitionEnd", function() {
         setTimeout(function() {
@@ -154,7 +160,6 @@
   function onDeviceReady() {
 
     CLICK = device.platform ? "touchstart" : CLICK;
-    alert(CLICK);
 
     // do your thing!
     //navigator.notification.alert("PhoneGap is working");
@@ -170,6 +175,7 @@
         sound = true;
 
     page.bind("webkitTransitionEnd", function() {
+      $("#welcome .typeable").css("visibility", "hidden");
       $("#welcome .wizard").bind("webkitAnimationEnd", function() {
         typeText($("#welcome .dialog .typeable")[0], function() {
           $("#welcome .choice").addClass("show");
@@ -210,6 +216,8 @@
     $("a[rel='town']").bind(CLICK, loadTown);
     $("a[rel='house']").bind(CLICK, loadHouse);
     $("a[rel='quest']").bind(CLICK, loadQuest);
+    $("a[rel='pub']").bind(CLICK, loadPub);
+    $("a[rel='fitness']").bind(CLICK, questChoice);
   }
 
   // Enable pusher logging - don't include this in production
@@ -217,11 +225,17 @@
     
   };
 
+  function questChoice() {
+    $("#questChoices .choice").removeClass("show");
+    $("#questOptions .choice").addClass("show");
+  }
+
   // Flash fallback logging - don't include this in production
   WEB_SOCKET_DEBUG = true;
 
   var pusher = new Pusher('8159432ab8d315714b65');
   var channel = pusher.subscribe('test_channel');
   channel.bind('my_event', function(data) {
+    console.log(data);
     popDialog(data);
   });

@@ -10,6 +10,10 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
   from { top: 55px; left: 120px; right: 120px; height: 0; opacity: .5; }
   to { top: 10px; left: 10px; right: 10px; opacity: 1; }
 }
+@-webkit-keyframes quest-dialog-grow {
+  from { top: 115px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 60px; left: 10px; right: 10px; opacity: 1; }
+}
 @-webkit-keyframes bottom-dialog-grow {
   from { top: 400px; left: 120px; right: 120px; height: 0; opacity: .5; }
   to { top: 384px; left: 0px; right: 0px; opacity: 1; }
@@ -25,6 +29,14 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
 @-webkit-keyframes third-choice-grow {
   from { top: 295px; left: 120px; right: 120px; height: 0; opacity: .5; }
   to { top: 280px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+@-webkit-keyframes fourth-choice-grow {
+  from { top: 235px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 220px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+@-webkit-keyframes fifth-choice-grow {
+  from { top: 175px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 160px; left: 10px; right: 10px; height: 25px; opacity: 1; }
 }
 
 .page {
@@ -87,7 +99,11 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
 }
 
 #quest {
-  background: url(../images/castleinterior.png) no-repeat 0 0;
+  background: url(../images/questinterior.png) no-repeat 0 0;
+}
+
+#pub {
+  background: url(../images/villagepub.png) no-repeat 0 0;
 }
 
 .hd {
@@ -154,17 +170,29 @@ a.blink {
 .choice { border-width: 12px;
   -webkit-animation-duration: .2s;
 }
-.show.first {
-  -webkit-animation-name: first-choice-grow;
-  top: 400px; left: 10px; right: 10px; height: 25px;
-}
 .choice a { color: #FFF; text-decoration: none;
   line-height: 27px; display: block;
   padding-left: 15px;
 }
+.show.first {
+  -webkit-animation-name: first-choice-grow;
+  top: 400px; left: 10px; right: 10px; height: 25px;
+}
 .show.second {
   -webkit-animation-name: second-choice-grow;
   top: 340px; left: 10px; right: 10px; height: 25px;
+}
+.show.third {
+  -webkit-animation-name: third-choice-grow;
+  top: 280px; left: 10px; right: 10px; height: 25px;
+}
+.show.fourth {
+  -webkit-animation-name: fourth-choice-grow;
+  top: 220px; left: 10px; right: 10px; height: 25px;
+}
+.show.fifth {
+  -webkit-animation-name: fifth-choice-grow;
+  top: 160px; left: 10px; right: 10px; height: 25px;
 }
 
 /*///////////////////*/
@@ -268,7 +296,7 @@ dt.fit { clear: left; }
   from { top: 135px; left: 120px; right: 120px; height: 0; opacity: .5; }
   to { top: 100px; left: 10px; right: 10px; opacity: 1; }
 }
-.screen {
+.blocker {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -276,25 +304,35 @@ dt.fit { clear: left; }
   right: 0;
   opacity: 0;
   z-index: -1;
-  content: "HELLO";
   text-indent: -1000px;
   background: #FFF;
   -webkit-transition: all .4s linear;
 }
-.screen.show {
+.blocker.show {
   z-index: 999;
   opacity: .4;
 }
-.popped {
+#popped {
   -webkit-animation-name: popped-dialog-grow;
   z-index: 1000;
+  opacity: 1;
   top: 100px; left: 10px; right: 10px;
 }
-.popped .dialog-inner {
+#popped .dialog-inner {
   z-index: 1000;
-  min-height: 20px;
-  padding: 0 10px;
+  padding: 0 10px 0 50px;
+  background: #063FF4 url(../images/foursquare.png) no-repeat 7px 0;
+  min-height: 32px;
 }
-.popped .typeable {
-  visibility: hidden;
+#popped .typeable { visibility: hidden; }
+
+#quest .wizard.show {
+  -webkit-animation-name: quest-dialog-grow;
+  height: 50px; top: 60px; left: 10px; right: 10px;
+}
+.back-button a { position: absolute;
+  top: 10px;
+  left: 7px;
+  height: 32px;
+  width: 58px;
 }
