@@ -1,3 +1,5 @@
+  window.alert = function() {};
+  var device = device || {};
 
   // If you want to prevent dragging, uncomment this section
   document.addEventListener("touchmove",
@@ -158,8 +160,9 @@
   see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
   for more details -jm */
   function onDeviceReady() {
-
-    CLICK = device.platform ? "touchstart" : CLICK;
+    if(device) {
+     CLICK = device.platform ? "touchstart" : CLICK;
+    }
 
     // do your thing!
     //navigator.notification.alert("PhoneGap is working");
@@ -185,31 +188,43 @@
 
     $("#welcome .choice").bind(CLICK, loadTown);
 
-    intro.play();
+    try {
+      intro.play();
 
-    vol.tap(function() {
-      if(sound) {
-        theme.pause();
-      } else {
-        theme.play();
-      }
-      sound = !sound;
-    });
+      vol.tap(function() {
+        if(sound) {
+          theme.pause();
+        } else {
+          theme.play();
+        }
+        sound = !sound;
+      });
+    }
+    catch(e) {
+
+    }
 
     start.bind(CLICK, function() {
-      intro.stop();
-      setTimeout(function() {
-        coin.play();
+      console.log("starting");
+      try {
+        intro.stop();
         setTimeout(function() {
-          page.addClass("one");
-          tinkle.play();
+          coin.play();
           setTimeout(function() {
-            theme.play();
-            coin.release();
-            tinkle.release();
-          }, 3000)
-        }, 1000);
-      }, 100);
+            page.addClass("one");
+            tinkle.play();
+            setTimeout(function() {
+              theme.play();
+              coin.release();
+              tinkle.release();
+            }, 3000)
+          }, 1000);
+        }, 100);
+      }
+      catch(e) {
+        console.log("going");
+        page.addClass("one");
+      }
       return false;
     });
 

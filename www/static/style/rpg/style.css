@@ -1,0 +1,340 @@
+html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,select,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,button,caption,cite,code,dfn,em,input,optgroup,option,select,strong,textarea,th,var{font:inherit}del,ins{text-decoration:none}li{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:baseline}sub{vertical-align:baseline}legend{color:#000}
+@font-face { font-family: "8bit"; src: url(../../fonts/04B_03__.TTF) format("truetype"); }
+body { font: 26px "8bit", monospace; text-transform: uppercase; width: 320px; margin: 0 auto; position: relative; }
+.page {
+  top: -1110px;
+}
+@-webkit-keyframes blinker {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+@-webkit-keyframes top-dialog-grow {
+  from { top: 55px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 10px; left: 10px; right: 10px; opacity: 1; }
+}
+@-webkit-keyframes quest-dialog-grow {
+  from { top: 115px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 60px; left: 10px; right: 10px; opacity: 1; }
+}
+@-webkit-keyframes bottom-dialog-grow {
+  from { top: 400px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 384px; left: 0px; right: 0px; opacity: 1; }
+}
+@-webkit-keyframes first-choice-grow {
+  from { top: 415px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 400px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+@-webkit-keyframes second-choice-grow {
+  from { top: 355px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 340px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+@-webkit-keyframes third-choice-grow {
+  from { top: 295px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 280px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+@-webkit-keyframes fourth-choice-grow {
+  from { top: 235px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 220px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+@-webkit-keyframes fifth-choice-grow {
+  from { top: 175px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 160px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+}
+
+.page {
+  height: 1590px;
+  width: 320px;
+  position: relative;
+  -webkit-transition: all 4s ease-out;
+}
+
+.page.one {
+  top: 0;
+}
+
+.sound {
+  position: absolute;
+  z-index: 100;
+  bottom: 0;
+  right: 0;
+}
+
+.sound a {
+  display: block;
+  text-indent: -1000px;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  height: 480px;
+  width: 320px;
+  opacity: 0;
+  -webkit-transition: all .5s linear;
+}
+
+.panel.show {
+  opacity: 1;
+  z-index: 50;
+}
+
+#start {
+  background: url(images/homescreen.png) no-repeat 0 0;
+  height: 1110px;
+  top: 480px;
+}
+
+#welcome {
+  background: url(images/castleinterior.png) no-repeat 0 0;
+  top: 0;
+}
+
+#dashboard {
+  background: url(images/dashboard.png) no-repeat 0 0;
+}
+
+#house {
+  background: url(images/houseinterior.png) no-repeat 0 0;
+}
+
+#quest {
+  background: url(images/questinterior.png) no-repeat 0 0;
+}
+
+#pub {
+  background: url(images/villagepub.png) no-repeat 0 0;
+}
+
+.hd {
+  color: #FFF;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 17.75em 0 .75em 0;
+}
+
+.start {
+  text-align: center;
+}
+
+.one a.blink {
+  -webkit-animation-name: none;
+}
+
+.start a {
+  color: #FF221B;
+  text-decoration: none;
+}
+
+a.blink {
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  -webkit-animation-duration: 1.25s;
+}
+
+.dialog {
+  text-transform: none;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFF;
+  position: absolute;
+  overflow: hidden;
+  -webkit-border-image: url(images/dialog-border.png) 14 10 13 10 repeat repeat;
+  border-width: 20px;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-duration: .3s;
+  display: none;
+  max-height: 150px;
+}
+
+.dialog.show {
+  display: block;
+}
+
+.dialog-inner {
+  background: #063FF4;
+  height: 100%;
+}
+.wizard .dialog-inner {
+  background: #063FF4 url(images/wizard.png) no-repeat 0 0;
+  padding-left: 50px;
+}
+#welcome .wizard.show {
+  -webkit-animation-name: top-dialog-grow;
+  height: 110px; top: 10px; left: 10px; right: 10px;
+}
+.wizard .dialog-inner p { visibility: hidden; }
+.choice { border-width: 12px;
+  -webkit-animation-duration: .2s;
+}
+.choice a { color: #FFF; text-decoration: none;
+  line-height: 27px; display: block;
+  padding-left: 15px;
+}
+.show.first {
+  -webkit-animation-name: first-choice-grow;
+  top: 400px; left: 10px; right: 10px; height: 25px;
+}
+.show.second {
+  -webkit-animation-name: second-choice-grow;
+  top: 340px; left: 10px; right: 10px; height: 25px;
+}
+.show.third {
+  -webkit-animation-name: third-choice-grow;
+  top: 280px; left: 10px; right: 10px; height: 25px;
+}
+.show.fourth {
+  -webkit-animation-name: fourth-choice-grow;
+  top: 220px; left: 10px; right: 10px; height: 25px;
+}
+.show.fifth {
+  -webkit-animation-name: fifth-choice-grow;
+  top: 160px; left: 10px; right: 10px; height: 25px;
+}
+
+/*///////////////////*/
+
+.stats {
+  color: #FFF;
+  font-size: .5em;
+  font-weight: normal;
+  text-transform: none;
+  padding-top: 3px;
+  opacity: 0;
+  -webkit-transition: opacity .25s linear;
+}
+.stats.show { opacity: 1; }
+.stats dt, .stats dd {
+  float: left;
+  line-height: 25px;
+  width: 25%;
+}
+.stats dt span { padding: 0 0 0 5px; }
+.stats dd { text-align: center; line-height: 17px; }
+.stats dd span {
+  border: 2px solid #FFF;
+  display: block;
+  margin: 1px 3px 1px 1px;
+  background: url(images/adv.png) no-repeat -70px 0;
+  -webkit-transition: background-position 1s linear;
+}
+dd.int span { background-image: url(images/int.png); }
+dd.fit span { background-image: url(images/fit.png); }
+dd.cha span { background-image: url(images/cha.png); }
+.show.stats dd.l1 span { background-position: -52px 0; }
+.show.stats dd.l2 span { background-position: -35px 0; }
+.show.stats dd.l3 span { background-position: -18px 0; }
+.show.stats dd.l4 span { background-position: 0 0; }
+dt.fit { clear: left; }
+#dashboard .wizard { border-width: 12px; }
+#dashboard .wizard.show {
+  -webkit-animation-name: bottom-dialog-grow;
+  height: 45px; top: 384px; left: 0; right: 0;
+}
+#dashboard .dialog { font-size: 14px; line-height: 16px; }
+
+.dash-nav a {
+  position: absolute;
+  display: block;
+  text-indent: -1000px;
+  top: 54px;
+  left: 0;
+}
+#dash-house a { width: 162px; height: 167px; }
+#dash-quest a {width: 158px; height: 167px; left: 162px; }
+#dash-pub a { width: 162px; height: 163px; top: 221px; }
+#dash-fame a { width: 158px; height: 167px; top: 221px; left: 162px; }
+
+/*///////////////////*/
+.d-hd { text-align: center; }
+.count { font-size: 3em; text-align: center; margin: .5em 0; }
+.msg { padding: 0 0 5px 45px; background: no-repeat 2px 2px; }
+.msg.klout { background-image: url(images/klout.png); }
+.msg.rk { background-image: url(images/rk.png); }
+
+.badges {
+  left: 10px; right: 165px; top: 75px; height: 150px;
+}
+.avatar {
+  left: 165px; right: 10px; top: 75px; height: 150px;
+}
+.messages {
+  font-size: 14px;
+  left: 10px; right: 10px; top: 275px; height: 100px;
+}
+
+@-webkit-keyframes badges-dialog-grow {
+  from { top: 145px; left: 75px; right: 250px; height: 0; opacity: .5; }
+  to { top: 60px; left: 10px; right: 165px; height: 145px; opacity: 1; }
+}
+@-webkit-keyframes avatar-dialog-grow {
+  from { top: 145px; left: 250px; right: 85px; height: 0; opacity: .5; }
+  to {  top: 60px; left: 165px; right: 10px; height: 145px; opacity: 1; }
+}
+@-webkit-keyframes messages-dialog-grow {
+  from { top: 280px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 260px; left: 10px; right: 10px; height: 90px; opacity: 1; }
+}
+
+.show.badges {
+  -webkit-animation-name: badges-dialog-grow;
+   top: 60px; left: 10px; right: 165px; height: 150px;
+}
+.show.avatar {
+  -webkit-animation-name: avatar-dialog-grow;
+   top: 60px; left: 165px; right: 10px; height: 150px;
+}
+.show.messages {
+  -webkit-animation-name: messages-dialog-grow;
+   top: 260px; left: 10px; right: 10px; height: 90px;
+}
+
+@-webkit-keyframes popped-dialog-grow {
+  from { top: 135px; left: 120px; right: 120px; height: 0; opacity: .5; }
+  to { top: 100px; left: 10px; right: 10px; opacity: 1; }
+}
+.blocker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  text-indent: -1000px;
+  background: #FFF;
+  -webkit-transition: all .4s linear;
+}
+.blocker.show {
+  z-index: 999;
+  opacity: .4;
+}
+#popped {
+  -webkit-animation-name: popped-dialog-grow;
+  z-index: 1000;
+  opacity: 1;
+  top: 100px; left: 10px; right: 10px;
+}
+#popped .dialog-inner {
+  z-index: 1000;
+  padding: 0 10px 0 50px;
+  background: #063FF4 url(images/foursquare.png) no-repeat 7px 0;
+  min-height: 32px;
+}
+#popped .typeable { visibility: hidden; }
+
+#quest .wizard.show {
+  -webkit-animation-name: quest-dialog-grow;
+  height: 50px; top: 60px; left: 10px; right: 10px;
+}
+.back-button a { position: absolute;
+  top: 10px;
+  left: 7px;
+  height: 32px;
+  width: 58px;
+}

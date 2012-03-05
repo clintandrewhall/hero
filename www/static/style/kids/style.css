@@ -1,7 +1,9 @@
 html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,select,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,button,caption,cite,code,dfn,em,input,optgroup,option,select,strong,textarea,th,var{font:inherit}del,ins{text-decoration:none}li{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:baseline}sub{vertical-align:baseline}legend{color:#000}
-@font-face { font-family: "8bit"; src: url(../fonts/04B_03__.TTF) format("truetype"); }
-body { font: 26px "8bit", monospace; text-transform: uppercase; }
-
+@font-face { font-family: "8bit"; src: url(images/grilledcheese.ttf) format("truetype"); }
+body { font: 26px "8bit", monospace; text-transform: uppercase; width: 320px; margin: 0 auto; position: relative; }
+.page {
+  top: -1110px;
+}
 @-webkit-keyframes blinker {
   from { opacity: 1.0; }
   to { opacity: 0.0; }
@@ -80,30 +82,30 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; }
 }
 
 #start {
-  background: url(../images/homescreen.png) no-repeat 0 0;
+  background: url(images/titlescreen.png) no-repeat 0 0;
   height: 1110px;
   top: 480px;
 }
 
 #welcome {
-  background: url(../images/castleinterior.png) no-repeat 0 0;
+  background: url(images/castleinterior.png) no-repeat 0 0;
   top: 0;
 }
 
 #dashboard {
-  background: url(../images/dashboard.png) no-repeat 0 0;
+  background: url(images/dashboard.png) no-repeat 0 0;
 }
 
 #house {
-  background: url(../images/houseinterior.png) no-repeat 0 0;
+  background: url(images/houseinterior.png) no-repeat 0 0;
 }
 
 #quest {
-  background: url(../images/questinterior.png) no-repeat 0 0;
+  background: url(images/questinterior.png) no-repeat 0 0;
 }
 
 #pub {
-  background: url(../images/villagepub.png) no-repeat 0 0;
+  background: url(images/villagepub.png) no-repeat 0 0;
 }
 
 .hd {
@@ -141,7 +143,7 @@ a.blink {
   color: #FFF;
   position: absolute;
   overflow: hidden;
-  -webkit-border-image: url(../images/dialog-border.png) 14 10 13 10 repeat repeat;
+  -webkit-border-image: url(images/dialog-border.png) 14 10 13 10 repeat repeat;
   border-width: 20px;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: ease-out;
@@ -159,7 +161,7 @@ a.blink {
   height: 100%;
 }
 .wizard .dialog-inner {
-  background: #063FF4 url(../images/wizard.png) no-repeat 0 0;
+  background: #063FF4 url(images/wizard.png) no-repeat 0 0;
   padding-left: 50px;
 }
 #welcome .wizard.show {
@@ -218,12 +220,12 @@ a.blink {
   border: 2px solid #FFF;
   display: block;
   margin: 1px 3px 1px 1px;
-  background: url(../images/adv.png) no-repeat -70px 0;
+  background: url(images/adv.png) no-repeat -70px 0;
   -webkit-transition: background-position 1s linear;
 }
-dd.int span { background-image: url(../images/int.png); }
-dd.fit span { background-image: url(../images/fit.png); }
-dd.cha span { background-image: url(../images/cha.png); }
+dd.int span { background-image: url(images/int.png); }
+dd.fit span { background-image: url(images/fit.png); }
+dd.cha span { background-image: url(images/cha.png); }
 .show.stats dd.l1 span { background-position: -52px 0; }
 .show.stats dd.l2 span { background-position: -35px 0; }
 .show.stats dd.l3 span { background-position: -18px 0; }
@@ -252,8 +254,8 @@ dt.fit { clear: left; }
 .d-hd { text-align: center; }
 .count { font-size: 3em; text-align: center; margin: .5em 0; }
 .msg { padding: 0 0 5px 45px; background: no-repeat 2px 2px; }
-.msg.klout { background-image: url(../images/klout.png); }
-.msg.rk { background-image: url(../images/rk.png); }
+.msg.klout { background-image: url(images/klout.png); }
+.msg.rk { background-image: url(images/rk.png); }
 
 .badges {
   left: 10px; right: 165px; top: 75px; height: 150px;
@@ -321,7 +323,7 @@ dt.fit { clear: left; }
 #popped .dialog-inner {
   z-index: 1000;
   padding: 0 10px 0 50px;
-  background: #063FF4 url(../images/foursquare.png) no-repeat 7px 0;
+  background: #063FF4 url(images/foursquare.png) no-repeat 7px 0;
   min-height: 32px;
 }
 #popped .typeable { visibility: hidden; }
