@@ -2,11 +2,11 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 @font-face { font-family: "8bit"; src: url(images/grilledcheese.ttf) format("truetype"); }
 body { font: 26px "8bit", monospace; text-transform: uppercase; width: 320px; margin: 0 auto; position: relative; }
 .page {
-  top: -1110px;
+  
 }
-@-webkit-keyframes blinker {
-  from { opacity: 1.0; }
-  to { opacity: 0.0; }
+@-webkit-keyframes start-page {
+  from { top: 0; }
+  to { top: 480px; }
 }
 @-webkit-keyframes top-dialog-grow {
   from { top: 55px; left: 120px; right: 120px; height: 0; opacity: .5; }
@@ -22,34 +22,34 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; width: 320px; ma
 }
 @-webkit-keyframes first-choice-grow {
   from { top: 415px; left: 120px; right: 120px; height: 0; opacity: .5; }
-  to { top: 400px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+  to { top: 400px; left: 10px; right: 10px; opacity: 1; }
 }
 @-webkit-keyframes second-choice-grow {
   from { top: 355px; left: 120px; right: 120px; height: 0; opacity: .5; }
-  to { top: 340px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+  to { top: 340px; left: 10px; right: 10px; opacity: 1; }
 }
 @-webkit-keyframes third-choice-grow {
   from { top: 295px; left: 120px; right: 120px; height: 0; opacity: .5; }
-  to { top: 280px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+  to { top: 280px; left: 10px; right: 10px; opacity: 1; }
 }
 @-webkit-keyframes fourth-choice-grow {
   from { top: 235px; left: 120px; right: 120px; height: 0; opacity: .5; }
-  to { top: 220px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+  to { top: 220px; left: 10px; right: 10px; opacity: 1; }
 }
 @-webkit-keyframes fifth-choice-grow {
   from { top: 175px; left: 120px; right: 120px; height: 0; opacity: .5; }
-  to { top: 160px; left: 10px; right: 10px; height: 25px; opacity: 1; }
+  to { top: 160px; left: 10px; right: 10px; opacity: 1; }
 }
 
 .page {
-  height: 1590px;
+  height: 480px;
   width: 320px;
   position: relative;
-  -webkit-transition: all 4s ease-out;
+  overflow: hidden;
 }
 
-.page.one {
-  top: 0;
+.one #start {
+  top: 480px;
 }
 
 .sound {
@@ -81,14 +81,15 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; width: 320px; ma
   z-index: 50;
 }
 
+#start.show { z-index: 70; }
+
 #start {
   background: url(images/titlescreen.png) no-repeat 0 0;
-  height: 1110px;
-  top: 480px;
+  top: 0;
 }
 
 #welcome {
-  background: url(images/castleinterior.png) no-repeat 0 0;
+  background: url(images/quest.png) no-repeat 0 0;
   top: 0;
 }
 
@@ -97,22 +98,22 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; width: 320px; ma
 }
 
 #house {
-  background: url(images/houseinterior.png) no-repeat 0 0;
+  background: url(images/house.png) no-repeat 0 0;
 }
 
 #quest {
-  background: url(images/questinterior.png) no-repeat 0 0;
+  background: url(images/quest.png) no-repeat 0 0;
 }
 
 #pub {
-  background: url(images/villagepub.png) no-repeat 0 0;
+  background: url(images/pub.png) no-repeat 0 0;
 }
 
 .hd {
   color: #FFF;
   font-size: 1.5em;
   text-align: center;
-  margin: 17.75em 0 .75em 0;
+  display: none;
 }
 
 .start {
@@ -124,26 +125,33 @@ body { font: 26px "8bit", monospace; text-transform: uppercase; width: 320px; ma
 }
 
 .start a {
-  color: #FF221B;
+  display: block;
+  position: absolute;
+  left: 60px;
+  top: 345px;
+  text-indent: -1000px;
+  overflow: hidden;
   text-decoration: none;
+  width: 210px;
+  height: 60px;
 }
 
 a.blink {
-  -webkit-animation-name: blinker;
+  /*-webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
-  -webkit-animation-duration: 1.25s;
+  -webkit-animation-duration: 1.25s;*/
 }
 
 .dialog {
   text-transform: none;
   font-weight: normal;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 24px;
+  line-height: 25px;
   color: #FFF;
   position: absolute;
   overflow: hidden;
-  -webkit-border-image: url(images/dialog-border.png) 14 10 13 10 repeat repeat;
+  -webkit-border-image: url(images/dialog-border.png) 15 repeat repeat;
   border-width: 20px;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: ease-out;
@@ -173,28 +181,28 @@ a.blink {
   -webkit-animation-duration: .2s;
 }
 .choice a { color: #FFF; text-decoration: none;
-  line-height: 27px; display: block;
+  line-height: 34px; display: block;
   padding-left: 15px;
 }
 .show.first {
   -webkit-animation-name: first-choice-grow;
-  top: 400px; left: 10px; right: 10px; height: 25px;
+  top: 400px; left: 10px; right: 10px; height: 32px;
 }
 .show.second {
   -webkit-animation-name: second-choice-grow;
-  top: 340px; left: 10px; right: 10px; height: 25px;
+  top: 340px; left: 10px; right: 10px; height: 32px;
 }
 .show.third {
   -webkit-animation-name: third-choice-grow;
-  top: 280px; left: 10px; right: 10px; height: 25px;
+  top: 280px; left: 10px; right: 10px; height: 32px;
 }
 .show.fourth {
   -webkit-animation-name: fourth-choice-grow;
-  top: 220px; left: 10px; right: 10px; height: 25px;
+  top: 220px; left: 10px; right: 10px; height: 32px;
 }
 .show.fifth {
   -webkit-animation-name: fifth-choice-grow;
-  top: 160px; left: 10px; right: 10px; height: 25px;
+  top: 160px; left: 10px; right: 10px; height: 32px;
 }
 
 /*///////////////////*/
@@ -208,7 +216,14 @@ a.blink {
   opacity: 0;
   -webkit-transition: opacity .25s linear;
 }
-.stats.show { opacity: 1; }
+.stats.show { opacity: 1;
+}
+#house .stats.show {
+  float: left;
+  width: 100%;
+  background: url(images/header.png) repeat-x 0 0;
+  height: 63px;
+}
 .stats dt, .stats dd {
   float: left;
   line-height: 25px;
@@ -223,9 +238,9 @@ a.blink {
   background: url(images/adv.png) no-repeat -70px 0;
   -webkit-transition: background-position 1s linear;
 }
-dd.int span { background-image: url(images/int.png); }
+/*dd.int span { background-image: url(images/int.png); }
 dd.fit span { background-image: url(images/fit.png); }
-dd.cha span { background-image: url(images/cha.png); }
+dd.cha span { background-image: url(images/cha.png); }*/
 .show.stats dd.l1 span { background-position: -52px 0; }
 .show.stats dd.l2 span { background-position: -35px 0; }
 .show.stats dd.l3 span { background-position: -18px 0; }
@@ -236,7 +251,7 @@ dt.fit { clear: left; }
   -webkit-animation-name: bottom-dialog-grow;
   height: 45px; top: 384px; left: 0; right: 0;
 }
-#dashboard .dialog { font-size: 14px; line-height: 16px; }
+#dashboard .dialog { font-size: 16px; line-height: 20px; }
 
 .dash-nav a {
   position: absolute;
@@ -253,9 +268,11 @@ dt.fit { clear: left; }
 /*///////////////////*/
 .d-hd { text-align: center; }
 .count { font-size: 3em; text-align: center; margin: .5em 0; }
-.msg { padding: 0 0 5px 45px; background: no-repeat 2px 2px; }
-.msg.klout { background-image: url(images/klout.png); }
-.msg.rk { background-image: url(images/rk.png); }
+.msg {
+  padding: 3px 15px 3px 30px;
+  background: no-repeat 2px 2px;
+  text-indent: -15px;
+}
 
 .badges {
   left: 10px; right: 165px; top: 75px; height: 150px;
@@ -264,7 +281,7 @@ dt.fit { clear: left; }
   left: 165px; right: 10px; top: 75px; height: 150px;
 }
 .messages {
-  font-size: 14px;
+  font-size: 18px;
   left: 10px; right: 10px; top: 275px; height: 100px;
 }
 
